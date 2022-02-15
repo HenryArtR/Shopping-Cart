@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { PrimeNGConfig } from "primeng/api";
+import { FirebaseService } from './store/services/firebase.service';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +9,12 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'projectfun';
+
+  constructor(private primengConfig: PrimeNGConfig, private login: FirebaseService) {}
+
+    ngOnInit() {
+        this.primengConfig.ripple = true;
+        this.login.changeLogin(false)
+
+    }
 }

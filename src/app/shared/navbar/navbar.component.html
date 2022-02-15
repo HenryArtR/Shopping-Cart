@@ -1,0 +1,62 @@
+
+<p-menubar [model]="items">
+    <ng-template pTemplate="start">
+        <p-button label="login" class="m-1" styleClass="p-button-outlined" routerLink="login"></p-button>
+        <p-button label="sign up" class="m-1" styleClass="p-button-outlined p-button-help" routerLink="sign-up"></p-button>
+    </ng-template>
+    <span class="flex">
+        <h3 class="m-3">{{helloUser}}</h3>
+        <p-button label="Carrito" icon="pi pi-shopping-bag" class="m-1" (onClick)="op.toggle($event)" (onClick)="calcularTotal()" badge={{carrito.length}} badgeClass="p-badge-danger" ></p-button>   
+    </span>
+</p-menubar>
+        
+
+<p-overlayPanel #op class="w-full" [showCloseIcon]="true">
+    <ng-template pTemplate="header" #mensaje>
+        Nada en el carrito
+    </ng-template>
+    <ng-template  pTemplate>
+        <p-table *ngIf="carrito.length > 0, else mensaje" [value]="carrito" [scrollable]="true">
+            <ng-template  pTemplate="header">
+                <tr>
+                    <th>Image</th>
+                    <th>Cantidad</th>
+                    <th>Precio</th>
+                    <th>Eliminar</th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-product>
+                <tr>
+                    <td><p-avatar [pTooltip] = product.title tooltipPosition="left" [image]=product.image pBadge [value]=product.cantidad styleClass="mr-2" size="large"></p-avatar></td>
+                    <td>   
+                        <div class="grid">
+                            <div class="col-6 flex justify-content-center align-items-center">
+                                <h3>{{product.cantidad}}</h3>
+                            </div>
+                            <div class="col-6">
+                                <p-button icon="pi pi-plus" styleClass="p-button-rounded p-button-text p-button-sm" (onClick)= "sumar(product)"></p-button>
+                                <p-button icon="pi pi-minus" styleClass="p-button-danger p-button-rounded p-button-text p-button-sm" (onClick)="restar(product)"></p-button>
+                            </div>
+                        </div>
+                    </td>
+                    <td>{{product.price * product.cantidad | number: '1.2-2'}} <i class="pi pi-euro"></i> </td>
+                    <td>
+                        <p-button type="button" icon="pi pi-trash" styleClass="p-button-danger p-button-outlined p-button-sm" (onClick)="eliminar(product)"></p-button>    
+                    </td>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="footer">
+                <h3 class="text-right">Total = {{total | number: '1.2-2'}} <i class="pi pi-euro"></i></h3> 
+                <div class="flex justify-content-end">
+                    <p-button label="Continuar" (onClick)="loginToast(op)"></p-button>
+                </div>
+                   
+            </ng-template>
+        </p-table>
+    </ng-template>
+</p-overlayPanel>
+<p-toast position="bottom-center" key="bc"></p-toast>
+
+
+
+

@@ -1,0 +1,29 @@
+<h1 class="text-center">Login</h1>
+<form [formGroup]="form" (submit)="enviar(form.value)" class="grid-container flex justify-content-center m-5">
+    <div class="col-5">
+        <div class="grid p-fluid">
+            <div class="col-12">
+                <span class="p-input-icon-right p-float-label">
+                    <i class="pi pi-user"></i>
+                    <input type="text" id="username" pInputText formControlName="usuario"/>
+                    <label for="username" class="block">Username</label>
+                </span>
+                <small *ngIf="form.get('usuario')?.errors && form.get('usuario')?.touched" class="p-error block">Enter your username.</small>
+            </div>
+            <div class="col-12">
+                <span class="p-input-icon-right p-float-label">
+                    <i class="pi pi-lock"></i>
+                    <input type="password" id="password2" pInputText formControlName="contrasena"/>
+                    <label for="password2" class="block">Password</label>
+                </span>
+                <small *ngIf="form.get('contrasena')?.errors && form.get('contrasena')?.touched" class="p-error block">Enter your password.</small>
+            </div>    
+        </div>
+        <div class="flex justify-content-end">
+            <span *ngIf="mError" class="p-error block mt-5">Usuario o contraseña incorrecto</span>
+            <p-button [disabled]="!form.valid" label="Send" type="submit" class="m-3"></p-button>
+        </div>
+    </div>
+</form>
+
+

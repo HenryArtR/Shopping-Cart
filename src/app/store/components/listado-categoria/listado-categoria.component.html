@@ -1,0 +1,23 @@
+<div class="grid mt-5 flex justify-content-center">
+    <div class="col-8">
+        <div class="grid">
+            <div class="col-12 sm:col-6 md:col-4 lg:col-4 fadein animation-duration-1000" *ngFor="let producto of productos">
+                <p-card [header]="producto.title" [subheader]="producto.category" class="flex justify-content-center" styleClass="p-card-shadow" >
+                    <ng-template pTemplate="header">           
+                        <img alt="Card" src={{producto.image}} class="h-20rem h-20rem p-5" >
+                    </ng-template>
+                    
+                        <span class="flex justify-content-center align-items-center">{{producto.price}} <i class="pi pi-euro"></i> </span>
+                    <ng-template pTemplate="footer">
+                        <div class="flex justify-content-center align-items-end">
+                            <p-button label="Detalles" icon="pi pi-info" styleClass="p-button-info p-button-sm m-1" (onClick)="irADetalles(producto.id)"></p-button>
+                            <p-button icon="pi pi-shopping-cart" styleClass="p-button-secondary p-button-sm m-1" (onClick)="addCarrito(producto)"></p-button>
+                        </div>
+                    </ng-template>
+                        
+                </p-card>
+            </div>
+        </div>
+    </div>
+</div>
+

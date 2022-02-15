@@ -1,0 +1,70 @@
+<h1 class="text-center">Sign up</h1>
+<form [formGroup]="form" (submit)="enviar(form.value)" class="grid-container flex justify-content-center m-5">
+    <div class="col-5">
+        <div class="grid p-fluid">
+            
+            <div class="col-12 md:col-6">
+                <span class="p-input-icon-right p-float-label">
+                    <i class="pi pi-pencil"></i>
+                    <input type="text" #name id="name" pInputText formControlName="nombre" class="ng-valid"/>
+                    <label for="name" class="block">Name</label>
+                </span>
+                <small *ngIf="form.get('nombre')?.errors && form.get('nombre')?.touched" class="p-error block">Enter your name.</small>
+            </div>
+            <div class="col-12 md:col-6">
+                <span class="p-input-icon-right p-float-label">
+                    <i class="pi pi-pencil"></i>
+                    <input type="text" id="lastname" pInputText formControlName="apellido" />
+                    <label for="lastname" class="block">Lastname</label>
+                </span>
+                <small *ngIf="form.get('apellido')?.errors && form.get('apellido')?.touched" class="p-error block">Enter your lastname.</small>
+            </div>
+            <div class="col-12">
+                <span class="p-input-icon-right p-float-label">
+                    <i class="pi pi-user"></i>
+                    <input type="text" id="username" pInputText formControlName="usuario"/>
+                    <label for="username" class="block">Username</label>
+                </span>
+                <small *ngIf="form.get('usuario')?.errors && form.get('usuario')?.touched" class="p-error block">Enter your username.</small>
+            </div>
+            <div class="col-12">
+                <span class="p-input-icon-right p-float-label">
+                    <i class="pi pi-at"></i>
+                    <input type="text" id="email" pInputText formControlName="email"/>
+                    <label for="email" class="block">Email</label>
+                </span>
+                <small *ngIf="form.get('email')?.errors && form.get('email')?.touched" class="p-error block">Enter your email.</small>
+            </div>
+            <div class="col-12 lg:col-6">
+                <span class="p-float-label">
+                    <p-password formControlName="contrasena">
+                        <ng-template pTemplate="header">
+                            <h4>Pick a password</h4>
+                            <ul class="pl-2 ml-2 mt-0">
+                                <li>Minimum 8 characters</li>
+                                <li>At least one lowercase</li>
+                                <li>At least one uppercase</li>
+                                <li>At least one numeric</li>
+                            </ul>
+                        </ng-template>
+                    </p-password>
+                    <label for="password" class="block">Password</label>
+                </span>              
+                <small *ngIf="form.get('contrasena')?.errors && form.get('contrasena')?.touched" class="p-error block">Enter your password.</small>
+            </div>
+            <div class="col-12 lg:col-6">
+                <span class="p-input-icon-right p-float-label">
+                    <i class="pi pi-lock"></i>
+                    <input type="password" id="password2" pInputText formControlName="contrasena2"/>
+                    <label for="password2" class="block">Repeat password</label>
+                </span>
+                <small *ngIf="form.get('contrasena2')?.errors && form.get('contrasena2')?.touched" class="p-error block">Password is not the same.</small>
+            </div>
+        </div>
+        <div class="flex justify-content-end">
+            <p-button [disabled]="!form.valid" label="Send" type="submit" class="m-3"></p-button>
+        </div>
+    </div>
+</form>
+
+

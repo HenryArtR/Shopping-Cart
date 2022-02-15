@@ -1,0 +1,38 @@
+<p-table [value]="carrito" responsiveLayout="scroll">
+    <ng-template pTemplate="header">
+        <tr>
+            <th>Image</th>
+            <th>Nombre</th>
+            <th>Cantidad</th>
+            <th>Precio</th>
+            <th>Eliminar</th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-product>
+        <tr>
+            <td><img [src]="product.image" alt="product.image" class="h-25rem"></td>
+            <td>{{product.title}}</td>
+            <td>   
+                <div class="grid">
+                    <div class="col-6 flex justify-content-center align-items-center">
+                        <h3>{{product.cantidad}}</h3>
+                    </div>
+                    <div class="col-6">
+                        <p-button icon="pi pi-plus" styleClass="p-button-rounded p-button-text p-button-sm" (onClick)= "sumar(product)"></p-button>
+                        <p-button icon="pi pi-minus" styleClass="p-button-danger p-button-rounded p-button-text p-button-sm" (onClick)="restar(product)"></p-button>
+                    </div>
+                </div>
+            </td>
+            <td>{{product.price * product.cantidad | number: '1.2-2'}} <i class="pi pi-euro"></i> </td>
+            <td>
+                <p-button type="button" icon="pi pi-trash" styleClass="p-button-danger p-button-outlined p-button-sm" (onClick)="eliminar(product)"></p-button>    
+            </td>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="footer" *ngIf="carrito.length > 0">        
+        <h3 class="text-end">Total = {{total | number: '1.2-2'}} <i class="pi pi-euro"></i></h3>
+        <div class="flex justify-content-end">
+            <p-button label="Confirm Buy" routerLink="carrito"></p-button>
+        </div>
+    </ng-template>
+</p-table>
