@@ -14,7 +14,7 @@ const routes: Routes = [
       {path: 'joyeria', component: JoyeriaComponent},
       {path: 'ropa-hombre', component: RopaHombreComponent},
       {path: 'ropa-mujer', component: RopaMujerComponent},
-      {path: '**', redirectTo: ''},
+      {path: '**', redirectTo: 'home'},
     ]
   }
 ]

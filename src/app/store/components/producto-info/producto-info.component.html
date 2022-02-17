@@ -1,9 +1,10 @@
-<div class="grid mt-5">
+
+<div class="grid-container">
     <div class="flex justify-content-center">
-        <div class="col-5 fadeindown animation-duration-2000">
+        <div class="col-10 sm:col-8 md:col-6 lg:col-5 fadeinleft animation-duration-2000">
             <p-card [header]= objeto.title [subheader]=objeto.category  styleClass="p-card-shadow">
                 <ng-template pTemplate="header">
-                    <img alt="Card" [src]=objeto.image class="img-thumbnail">
+                    <img alt="Card" [src]=objeto.image class="h-25rem w-25-rem">
                 </ng-template>
                 <p class="m-2">{{objeto.description}}</p>
                 <ng-template pTemplate="footer">
@@ -16,3 +17,4 @@
         </div>
     </div>
 </div>
+

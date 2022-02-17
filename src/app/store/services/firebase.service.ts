@@ -9,10 +9,10 @@ import { Formulario } from '../interfaces/formulario.interface';
 })
 export class FirebaseService {
 
-  private login$: Subject<boolean> = new Subject()
+  registrado$: Subject<boolean> = new Subject()
+  registrado: boolean = false;
 
-  constructor(private firestore: AngularFirestore) {
-  }
+  constructor(private firestore: AngularFirestore) {}
 
   registrarUsuario(user: Formulario): Promise<any>{
     return this.firestore.collection('usuarios').add(user)
@@ -22,12 +22,5 @@ export class FirebaseService {
     return this.firestore.collection('usuarios').valueChanges()
   }
 
-  changeLogin(valor: boolean){
-    this.login$.next(valor)
-  }
-
-  getLogin(): Observable<boolean>{
-    return this.login$.asObservable()
-  }
 
 }

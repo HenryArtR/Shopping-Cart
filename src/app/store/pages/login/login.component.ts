@@ -14,7 +14,7 @@ import { StoreService } from '../../services/store.service';
 export class LoginComponent implements OnInit {
 
   mError: boolean = false;
-
+  registrado: boolean = true
   form: FormGroup
   constructor(private build: FormBuilder, private firestore: FirebaseService, private srvStore: StoreService, private router: Router) {
     this.form = this.build.group({
@@ -34,12 +34,14 @@ export class LoginComponent implements OnInit {
           this.router.navigate(['home'])
           this.srvStore.cambiarNombreApellido(resp.nombre, resp.apellido)
           this.mError = false
-          this.firestore.changeLogin(true)
+          this.firestore.registrado$.next(true)
+          this.firestore.registrado = true
         }
       })
+      this.mError = true
+      this.form.reset()
+
     })
-    this.mError = true
-    this.form.reset()
   }
 
 }

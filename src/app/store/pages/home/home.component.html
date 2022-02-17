@@ -2,6 +2,9 @@
 <p-carousel [value]="productos" [numVisible]="3" [numScroll]="1" >
     <ng-template pTemplate="header">
         <h1>Productos en el catalogo</h1>
+        <div *ngIf="carga">
+            <p-progressBar mode="indeterminate"></p-progressBar>
+        </div>
     </ng-template>
     <ng-template let-item pTemplate="item">
         <div class="flex justify-content-center ">
@@ -23,5 +26,5 @@
     </ng-template>
 </p-carousel>
 
-<router-outlet></router-outlet>
+
 

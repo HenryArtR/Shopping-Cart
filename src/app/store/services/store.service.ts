@@ -9,9 +9,13 @@ import { Productos } from '../interfaces/store.interface';
 })
 export class StoreService {
 
-  nombre$: Subject<string> = new Subject() 
-  apellido$: Subject<string> = new Subject() 
+  
+  private nombre$: Subject<string> = new Subject() 
+  private apellido$: Subject<string> = new Subject()
+  private carrito$: Subject<Productos[]> = new Subject()
+  cantidadTotal$: Subject<number> = new Subject()
 
+  cantidadTotal: number = 0
   totalItem: number = 0;
   total: number = 0;
   carrito: Productos[] = [];
@@ -30,10 +34,13 @@ export class StoreService {
     return this.http.get<Productos[]>(`https://fakestoreapi.com/products/category/${value}`)
   }
 
-  addCarrito(valor: Productos){   
+  addCarrito(valor: Productos){
+    this.cantidadTotal++
+    this.cantidadTotal$.next(this.cantidadTotal)
     if(!this.carrito.includes(valor)){
       valor.cantidad = 1
       this.carrito.push(valor)
+      this.carrito$.next(this.carrito)
     }else{
       valor.cantidad++
     }
@@ -58,11 +65,18 @@ export class StoreService {
     this.apellido$.next(valor2)
   }
 
-  getNombre(): Observable<string>{
+  getNombre$(): Observable<string>{
     return this.nombre$.asObservable()
   }
-  getApellido(): Observable<string>{
+  getApellido$(): Observable<string>{
     return this.apellido$.asObservable()
+  }
+
+  setCarrito$(valor: Productos[]){
+    this.carrito$.next(valor)
+  }
+  getCarrito$(): Observable<Productos[]>{
+    return this.carrito$
   }
 
 }

@@ -20,13 +20,14 @@ import { StoreService } from '../../services/store.service';
   ]
 })
 export class ListadoCategoriaComponent implements OnInit {
-
+  
+  carga: boolean = true
   @Input() categoria: string = ''
   productos: Productos[] = []
   constructor(private category: StoreService, private router: Router) { }
 
   ngOnInit(): void {
-    this.category.setAndGetCategory(this.categoria).subscribe( result => this.productos = result)
+    this.category.setAndGetCategory(this.categoria).subscribe( result => {this.productos = result}, (err) =>{}, () => this.carga = false)
   }
 
   irADetalles(id:number){

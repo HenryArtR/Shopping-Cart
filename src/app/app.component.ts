@@ -10,11 +10,9 @@ import { FirebaseService } from './store/services/firebase.service';
 export class AppComponent {
   title = 'projectfun';
 
-  constructor(private primengConfig: PrimeNGConfig, private login: FirebaseService) {}
+  constructor(private primengConfig: PrimeNGConfig) {}
 
     ngOnInit() {
         this.primengConfig.ripple = true;
-        this.login.changeLogin(false)
-
     }
 }

@@ -13,11 +13,12 @@ export class HomeComponent implements OnInit {
 
   cantidad: number = 0
   productos: Productos[] = []
+  carga: boolean = true
 
   constructor(private product: StoreService, private router: Router) { }
 
   ngOnInit(): void {
-    this.product.getProductos().subscribe(items => this.productos = items)
+    this.product.getProductos().subscribe(items => this.productos = items, err =>{},() => this.carga = false)
   }
 
   irADetalles(id:number){
@@ -26,8 +27,7 @@ export class HomeComponent implements OnInit {
 
 
   addCarrito(valor: Productos){
-    this.product.addCarrito(valor)
-    
+    this.product.addCarrito(valor)    
   }
 
 

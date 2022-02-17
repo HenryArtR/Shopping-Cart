@@ -1,10 +1,13 @@
+<div *ngIf="carga">
+    <p-progressBar mode="indeterminate"></p-progressBar>
+</div>
 <div class="grid mt-5 flex justify-content-center">
-    <div class="col-8">
+    <div class="col-9">
         <div class="grid">
-            <div class="col-12 sm:col-6 md:col-4 lg:col-4 fadein animation-duration-1000" *ngFor="let producto of productos">
+            <div class="col-12 sm:col-6 md:col-4 lg:col-3 fadein animation-duration-1000" *ngFor="let producto of productos">
                 <p-card [header]="producto.title" [subheader]="producto.category" class="flex justify-content-center" styleClass="p-card-shadow" >
                     <ng-template pTemplate="header">           
-                        <img alt="Card" src={{producto.image}} class="h-20rem h-20rem p-5" >
+                        <img alt="Card" src={{producto.image}} class="h-18rem" >
                     </ng-template>
                     
                         <span class="flex justify-content-center align-items-center">{{producto.price}} <i class="pi pi-euro"></i> </span>

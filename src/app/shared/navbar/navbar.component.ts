@@ -19,6 +19,8 @@ export class NavbarComponent implements OnInit {
   carrito: Productos[] = [];
   items: MenuItem[] = [];
   total: number = 0;
+  registrado: boolean = false
+  cantidadCarrito: number = 0
 
 
 
@@ -43,32 +45,49 @@ export class NavbarComponent implements OnInit {
       }
     ];
 
-    this.carrito = this.srvStore.carrito
-
-    this.srvStore.getNombre().subscribe(resp => this.nombre = resp)
-    this.srvStore.getApellido().subscribe(resp => {
-      this.apellido = resp
-      this.helloUser = `Bienvenido, ${this.nombre} ${this.apellido}`
+    this.firebase.registrado$.subscribe(resp => {
+      this.registrado = resp
+      if(resp == true){
+        this.helloUser = `Bienvenido, ${this.nombre} ${this.apellido}`
+      }else{
+        this.helloUser = ''
+        this.registrado = false
+      }
     })
+    
+    this.srvStore.cantidadTotal$.subscribe(num=> this.cantidadCarrito = num)
+    this.srvStore.getCarrito$().subscribe(resp => this.carrito = resp)
+    this.srvStore.getNombre$().subscribe(resp => this.nombre = resp)
+    this.srvStore.getApellido$().subscribe(resp => this.apellido = resp)
     
   }
 
-  calcularTotal(){
+  calcularTotal(op?:any){
     this.srvStore.total = 0
     this.srvStore.calcularTotal()
     this.total = this.srvStore.total
+    if(this.carrito.length == 0){
+      op.hide()
+      this.toast.add({key: 'tc', severity: 'info', summary: 'For continue', detail: 'Add something to cart'})
+    }
+    
   }
 
   sumar(valor: Productos){
-      this.srvStore.carrito.filter(item => valor == item ? item.cantidad++ : null)
-      this.srvStore.calcularTotalItem()
-      this.calcularTotal()
+    this.cantidadCarrito++
+    this.srvStore.cantidadTotal = this.cantidadCarrito
+    this.srvStore.carrito.filter(item => valor == item ? item.cantidad++ : null)
+    this.srvStore.calcularTotalItem()
+    this.calcularTotal()
   }
 
   restar(valor: Productos){
+    this.cantidadCarrito--
+    this.srvStore.cantidadTotal = this.cantidadCarrito
     if(valor.cantidad > 0){
       this.srvStore.carrito.filter((item,i) => {
         valor == item ? item.cantidad-- : null
+        
         if(item.cantidad == 0){
           this.srvStore.carrito.splice(i, 1)
         }
@@ -84,21 +103,29 @@ export class NavbarComponent implements OnInit {
         this.srvStore.carrito.splice(i, 1)
       }
     })
+    let resta = this.cantidadCarrito - valor.cantidad
+    this.srvStore.cantidadTotal = resta
+    this.cantidadCarrito = resta
+    this.srvStore.calcularTotalItem()
+    this.calcularTotal()
   }
 
   loginToast(valor: any){
+    if(this.firebase.registrado == false){
+      this.toast.add({key: 'bc', severity: 'error', summary: 'For continue', detail: 'You must log in'})
+    }
+    this.router.navigate(['carrito'])
     valor.hide()
-    this.firebase.getLogin().subscribe(result => {
-      console.log(result)
-      if(result == true){
-        this.router.navigate(['carrito'])
-      }else{
-        this.router.navigate(['login'])
-        this.toast.add({key: 'bc', severity: 'error', summary: 'For continue', detail: 'You must log in'})
-      }
-    })
-    
-    
+  }
+
+  reset(){
+    this.srvStore.cambiarNombreApellido('','')
+    this.firebase.registrado$.next(false)
+    this.firebase.registrado = false
+    this.srvStore.carrito = []
+    this.carrito = []
+    this.srvStore.setCarrito$(this.carrito)
+    this.router.navigate(['home'])
   }
   
 

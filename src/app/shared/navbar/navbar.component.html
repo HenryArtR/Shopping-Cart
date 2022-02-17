@@ -1,22 +1,23 @@
 
 <p-menubar [model]="items">
-    <ng-template pTemplate="start">
-        <p-button label="login" class="m-1" styleClass="p-button-outlined" routerLink="login"></p-button>
-        <p-button label="sign up" class="m-1" styleClass="p-button-outlined p-button-help" routerLink="sign-up"></p-button>
+    <ng-template #out pTemplate="start">
+        <ng-template #out>
+            <p-button label="Log out" class="m-1" styleClass="p-button-outlined" (onClick)="reset()"></p-button>
+        </ng-template>
+        <div *ngIf="!registrado, else out">
+            <p-button label="Log in" class="m-1" icon="pi pi-user" styleClass="p-button-outlined" routerLink="login"></p-button>
+            <p-button label="Sign up" class="m-1" icon="pi pi-user-plus" styleClass="p-button-outlined p-button-help" routerLink="sign-up"></p-button>
+        </div>
     </ng-template>
     <span class="flex">
-        <h3 class="m-3">{{helloUser}}</h3>
-        <p-button label="Carrito" icon="pi pi-shopping-bag" class="m-1" (onClick)="op.toggle($event)" (onClick)="calcularTotal()" badge={{carrito.length}} badgeClass="p-badge-danger" ></p-button>   
+        <h3 class="m-3">{{helloUser | titlecase}}</h3>
+        <p-button label="Cart" icon="pi pi-shopping-bag" class="m-1" (onClick)="op.toggle($event)" (onClick)="calcularTotal(op)" badge={{cantidadCarrito}} badgeClass="p-badge-danger" ></p-button>   
     </span>
 </p-menubar>
-        
-
-<p-overlayPanel #op class="w-full" [showCloseIcon]="true">
-    <ng-template pTemplate="header" #mensaje>
-        Nada en el carrito
-    </ng-template>
-    <ng-template  pTemplate>
-        <p-table *ngIf="carrito.length > 0, else mensaje" [value]="carrito" [scrollable]="true">
+<p-toast key="tc" position="top-center"></p-toast>
+<p-overlayPanel #op [showCloseIcon]="true">
+    <ng-template pTemplate>
+        <p-table [value]="carrito" [paginator]="true" [rows]="3" responsiveLayout="scroll">
             <ng-template  pTemplate="header">
                 <tr>
                     <th>Image</th>
@@ -46,16 +47,16 @@
                 </tr>
             </ng-template>
             <ng-template pTemplate="footer">
-                <h3 class="text-right">Total = {{total | number: '1.2-2'}} <i class="pi pi-euro"></i></h3> 
-                <div class="flex justify-content-end">
-                    <p-button label="Continuar" (onClick)="loginToast(op)"></p-button>
-                </div>
-                   
+                <tr>
+                    <td><h3>Total =</h3></td>
+                    <td colspan="2" class="text-right"><h3>{{total | number: '1.2-2'}} <i class="pi pi-euro"></i></h3></td>
+                    <td><p-button label="Confirm Buy" routerLink="home"></p-button></td>
+                </tr>
             </ng-template>
         </p-table>
     </ng-template>
 </p-overlayPanel>
-<p-toast position="bottom-center" key="bc"></p-toast>
+<p-toast position="bottom-left" key="bc"></p-toast>
 
 
 

@@ -1,19 +1,21 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { MessageService } from 'primeng/api';
 import { Formulario } from '../../interfaces/formulario.interface';
 import { FirebaseService } from '../../services/firebase.service';
 
 @Component({
   selector: 'app-sign-up',
   templateUrl: './sign-up.component.html',
-  styles: [
-  ]
+  styles: [],
+  providers: [MessageService]
 })
 export class SignUpComponent implements OnInit {
 
   numUsers: number = 11235813
   form: FormGroup
-  constructor(private build: FormBuilder, private firestore: FirebaseService) {
+  constructor(private build: FormBuilder, private firestore: FirebaseService, private mensaje: MessageService, private router: Router) {
     this.form = this.build.group({
       nombre: ['', Validators.required],
       apellido: ['', Validators.required],
@@ -35,7 +37,7 @@ export class SignUpComponent implements OnInit {
       valor.id = this.numUsers++
       valor.date = new Date()
       this.firestore.registrarUsuario(valor).then(() =>{
-        console.log('Registrado Correctamente')
+        this.mensaje.add({key:'bc', severity: 'info', summary: 'Registered User', icon: 'pi pi-check'})
       }, error => {
         console.log(error)
       } )

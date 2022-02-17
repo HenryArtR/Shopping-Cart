@@ -12,6 +12,10 @@ import { RippleModule } from 'primeng/ripple';
 import { InputTextModule } from 'primeng/inputtext';
 import { PasswordModule } from 'primeng/password';
 import { ToastModule } from 'primeng/toast';
+import {ImageModule} from 'primeng/image';
+import {ProgressBarModule} from 'primeng/progressbar';
+
+
 
 
 
@@ -31,7 +35,9 @@ import { ToastModule } from 'primeng/toast';
     RippleModule,
     InputTextModule,
     PasswordModule,
-    ToastModule
+    ToastModule,
+    ImageModule,
+    ProgressBarModule
     
   ]
 })

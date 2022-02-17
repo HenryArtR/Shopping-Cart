@@ -21,6 +21,8 @@ const routes: Routes = [
   {path: 'producto/:id', component: ProductoInfoComponent},
   {path: 'login', component: LoginComponent},
   {path: 'sign-up', component: SignUpComponent},
+  {path: '**', redirectTo: 'home'},
+
 ];
 
 @NgModule({
