@@ -1,5 +1,8 @@
 {
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "cli": {
+    "analytics": "e2ae6c4e-9c88-4e5d-bcda-d03d124100c8"
+  },
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
@@ -27,7 +30,6 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.css",
               "node_modules/primeicons/primeicons.css",
               "node_modules/primeng/resources/themes/mdc-light-indigo/theme.css",
               "node_modules/primeng/resources/primeng.min.css",
