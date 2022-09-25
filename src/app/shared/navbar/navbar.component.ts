@@ -125,6 +125,8 @@ export class NavbarComponent implements OnInit {
     this.srvStore.carrito = []
     this.carrito = []
     this.srvStore.setCarrito$(this.carrito)
+    this.srvStore.cantidadTotal$.next(this.carrito.length)
+    this.srvStore.cantidadTotal = this.carrito.length
     this.router.navigate(['home'])
   }
   

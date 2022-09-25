@@ -30,6 +30,7 @@ export class LoginComponent implements OnInit {
   enviar(valor: Login){
     this.firestore.loginUsuario().subscribe(doc => {
       doc.map((resp: any) => {
+        console.log(resp)
         if (valor.usuario == resp.usuario && valor.contrasena == resp.contrasena) {
           this.router.navigate(['home'])
           this.srvStore.cambiarNombreApellido(resp.nombre, resp.apellido)
