@@ -1,10 +1,10 @@
 
 <p-menubar [model]="items">
-    <ng-template #out pTemplate="start">
+    <ng-template pTemplate="start">
         <ng-template #out>
             <p-button label="Log out" class="m-1" styleClass="p-button-outlined" (onClick)="reset()"></p-button>
         </ng-template>
-        <div *ngIf="!registrado, else out">
+        <div data-test="btn-left" *ngIf="!registrado, else out">
             <p-button label="Log in" class="m-1" icon="pi pi-user" styleClass="p-button-outlined" routerLink="login"></p-button>
             <p-button label="Sign up" class="m-1" icon="pi pi-user-plus" styleClass="p-button-outlined p-button-help" routerLink="sign-up"></p-button>
         </div>
