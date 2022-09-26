@@ -17,7 +17,7 @@ export class HomeComponent implements OnInit {
 
   constructor(private product: StoreService, private router: Router) { }
 
-  ngOnInit(): void {
+  ngOnInit() {
     this.product.getProductos().subscribe(items => this.productos = items, err =>{},() => this.carga = false)
   }
 

@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { CategoriesComponent } from './categories.component';
 import { ElectronicaComponent } from './electronica/electronica.component';
 import { JoyeriaComponent } from './joyeria/joyeria.component';
 import { RopaHombreComponent } from './ropa-hombre/ropa-hombre.component';
