@@ -1,0 +1,26 @@
+[
+  {
+    "find": "name", 
+    "text": "Name"
+  },
+  {
+    "find": "lastname", 
+    "text": "Lastname"
+  },
+  {
+    "find": "username", 
+    "text": "Username"
+  },
+  {
+    "find": "email", 
+    "text": "Email"
+  },
+  {
+    "find": "password", 
+    "text": "Password"
+  },
+  {
+    "find": "password2", 
+    "text": "Repeat password"
+  }
+]

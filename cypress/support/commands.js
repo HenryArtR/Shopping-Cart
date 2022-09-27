@@ -11,7 +11,11 @@
 //
 //
 // -- This is a parent command --
-// Cypress.Commands.add('login', (email, password) => { ... })
+Cypress.Commands.add('form', (type, find, text) => { 
+  cy.get(`[data-test="${type}-form"]`)
+        .find(`[for=${find}]`)
+        .should('have.text',`${text}`)
+})
 //
 //
 // -- This is a child command --
