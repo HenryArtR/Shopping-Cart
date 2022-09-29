@@ -21,6 +21,15 @@ export class FirebaseService {
   loginUsuario(): Observable<any>{
     return this.firestore.collection('usuarios').valueChanges()
   }
+  
+  getUsuario(): Observable<any>{
+    return this.firestore.collection('usuarios').snapshotChanges()
+  }
+
+
+  eliminarUsuario(): Observable<any>{
+    return this.firestore.collection('usuarios').get()
+  }
 
 
 }

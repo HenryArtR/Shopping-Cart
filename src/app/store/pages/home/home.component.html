@@ -1,16 +1,16 @@
 
-<p-carousel [value]="productos" [numVisible]="3" [numScroll]="1" >
+<p-carousel [value]="productos" [numVisible]="3" [numScroll]="3" >
     <ng-template pTemplate="header">
         <h1>Productos en el catalogo</h1>
         <div *ngIf="carga">
             <p-progressBar mode="indeterminate"></p-progressBar>
         </div>
     </ng-template>
-    <ng-template let-item pTemplate="item">
+    <ng-template data-test="carousel" let-item pTemplate="item">
         <div class="flex justify-content-center ">
             <div class="fadeinright animation-duration-1000">
                 <div class="flex justify-content-center">
-                    <img src="{{item.image}}" alt="title" class="h-15rem w-15rem" />
+                    <!-- <img src="{{item.image}}" alt="title" class="h-15rem w-15rem" /> -->
                 </div>
                 <div>
                     <h4 class="mb-1">{{item.title}}</h4>

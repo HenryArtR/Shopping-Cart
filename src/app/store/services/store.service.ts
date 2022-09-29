@@ -23,7 +23,7 @@ export class StoreService {
   constructor(private http: HttpClient) { }
 
   getProductos(): Observable<Productos[]>{
-    return this.http.get<Productos[]>('https://fakestoreapi.com/products?limit=9')
+    return this.http.get<Productos[]>('https://fakestoreapi.com/products?limit=12')
   }
   getProducto(id:string): Observable<Productos>{
     return this.http.get<Productos>(`https://fakestoreapi.com/products/${id}`)
